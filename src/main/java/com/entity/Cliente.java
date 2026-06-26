@@ -2,6 +2,12 @@ package com.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.jspecify.annotations.Nullable;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -10,7 +16,12 @@ import lombok.*;
 @Entity
 @Data
 @Table(name="cliente")
-public class Cliente {
+public class Cliente implements UserDetails {
+
+
+    public Cliente(Integer codCliente, String nome, String cognome, String email, double saldoContoCorrente, String numConto, String ruolo) {
+    }
+
     @Id
     @Column(name = "codCliente")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,5 +42,27 @@ public class Cliente {
     @Column(name = "numConto")
     private String numConto;
 
+    @Column(name = "ruolo")
+    private String ruolo;
 
+    @Column(name = "password")
+    private String password;
+
+
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public @Nullable String getPassword() {
+        return "";
+    }
+
+    @Override
+    public String getUsername() {
+        return "";
+    }
 }

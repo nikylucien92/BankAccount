@@ -15,7 +15,9 @@ public class ClienteMapper {
                 cliente.getCognome(),
                 cliente.getEmail(),
                 cliente.getSaldoContoCorrente(),
-                cliente.getNumConto()
+                cliente.getNumConto(),
+                cliente.getRuolo()
+
         );
     }
 
@@ -27,7 +29,9 @@ public class ClienteMapper {
                 clienteDto.getCognome(),
                 clienteDto.getEmail(),
                 clienteDto.getSaldoContoCorrente(),
-                clienteDto.getNumConto()
+                clienteDto.getNumConto(),
+                clienteDto.getRuolo()
+
         );
     }
 

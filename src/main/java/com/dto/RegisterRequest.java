@@ -1,21 +1,19 @@
 package com.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import lombok.*;
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-public class ClienteDto {
-    private Integer codCliente;
+public class RegisterRequest {
+
     private String nome;
     private String cognome;
     private String email;
-    private double saldoContoCorrente;
+    private String password;
+    private double  saldoContoCorrente;
     private String numConto;
     private String ruolo;
-    //private String password;
-
 }
