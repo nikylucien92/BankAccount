@@ -1,4 +1,4 @@
-package com.dto;
+package com.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

@@ -1,14 +1,12 @@
-package com.controller;
+package com.authentication;
 
-import com.dto.AuthenticationResponse;
-import com.dto.RegisterRequest;
 import com.serviceImpl.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.dto.LoginRequest;
+
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor

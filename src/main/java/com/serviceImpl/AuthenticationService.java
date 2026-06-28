@@ -1,9 +1,9 @@
 package com.serviceImpl;
 
 import com.authentication.JwtService;
-import com.dto.AuthenticationResponse;
-import com.dto.LoginRequest;
-import com.dto.RegisterRequest;
+import com.authentication.AuthenticationResponse;
+import com.authentication.LoginRequest;
+import com.authentication.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
