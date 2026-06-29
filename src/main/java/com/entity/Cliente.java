@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
 
-@Getter
-@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -18,9 +18,6 @@ import java.util.List;
 @Table(name="cliente")
 public class Cliente implements UserDetails {
 
-
-    public Cliente(Integer codCliente, String nome, String cognome, String email, double saldoContoCorrente, String numConto, String ruolo) {
-    }
 
     @Id
     @Column(name = "codCliente")
@@ -37,7 +34,7 @@ public class Cliente implements UserDetails {
     private String email;
 
     @Column(name = "saldoContoCorrente")
-    private double saldoContoCorrente;
+    private int saldoContoCorrente;
 
     @Column(name = "numConto")
     private String numConto;
@@ -49,20 +46,19 @@ public class Cliente implements UserDetails {
     private String password;
 
 
-
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(ruolo));
+        //il return , ritorna un oggetto di un tipo di ruolo , che viene usato nella nostra classe enum di ADMIN,USER per le autorizzazioni
     }
 
     @Override
     public @Nullable String getPassword() {
-        return "";
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return email;
     }
 }

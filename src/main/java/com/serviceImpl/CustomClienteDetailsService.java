@@ -18,7 +18,7 @@ public class CustomClienteDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 
-        return repoCliente.findByUsername(username)
+        return repoCliente.findByEmail(username)
                 .orElseThrow(() ->
                         new UsernameNotFoundException(
                                 "Cliente non trovato"));

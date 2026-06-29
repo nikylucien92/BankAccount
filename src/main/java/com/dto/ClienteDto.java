@@ -13,9 +13,8 @@ public class ClienteDto {
     private String nome;
     private String cognome;
     private String email;
-    private double saldoContoCorrente;
+    private int saldoContoCorrente;
     private String numConto;
     private String ruolo;
-    //private String password;
 
 }

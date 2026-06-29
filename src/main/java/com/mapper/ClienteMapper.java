@@ -23,16 +23,17 @@ public class ClienteMapper {
 
     public static Cliente mapToCliente(ClienteDto clienteDto){
 
-        return new Cliente(
-                clienteDto.getCodCliente(),
-                clienteDto.getNome(),
-                clienteDto.getCognome(),
-                clienteDto.getEmail(),
-                clienteDto.getSaldoContoCorrente(),
-                clienteDto.getNumConto(),
-                clienteDto.getRuolo()
+        Cliente cliente = new Cliente();
 
-        );
+        cliente.setCodCliente(clienteDto.getCodCliente());
+        cliente.setNome(clienteDto.getNome());
+        cliente.setCognome(clienteDto.getCognome());
+        cliente.setEmail(clienteDto.getEmail());
+        cliente.setSaldoContoCorrente(clienteDto.getSaldoContoCorrente());
+        cliente.setNumConto(clienteDto.getNumConto());
+        cliente.setRuolo(clienteDto.getRuolo());
+
+        return cliente;
     }
 
 

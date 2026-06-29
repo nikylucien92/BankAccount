@@ -30,16 +30,14 @@ public class AuthenticationService {
             RegisterRequest request) {
 
         Cliente cliente = new Cliente();
+        cliente.setNome(request.getNome());
         cliente.setCognome(request.getCognome());
-
         cliente.setEmail(request.getEmail());
 
-        cliente.setPassword(
-                passwordEncoder.encode(
-                        request.getPassword()));
-
+        cliente.setPassword(passwordEncoder.encode(request.getPassword()));
+        cliente.setNumConto(request.getNumConto());
         cliente.setRuolo("ROLE_USER");
-
+    cliente.setSaldoContoCorrente(request.getSaldoContoCorrente());
         clienteRepository.save(cliente);
 
         String jwtToken =
