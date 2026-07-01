@@ -13,7 +13,4 @@ public class RegisterRequest {
     private String cognome;
     private String email;
     private String password;
-    private String numConto;
-    private String ruolo;
-    private int saldoContoCorrente;
 }

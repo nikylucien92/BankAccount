@@ -19,6 +19,8 @@ import java.util.List;
 public class Cliente implements UserDetails {
 
 
+
+
     @Id
     @Column(name = "codCliente")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

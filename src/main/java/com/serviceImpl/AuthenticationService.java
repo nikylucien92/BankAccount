@@ -35,9 +35,7 @@ public class AuthenticationService {
         cliente.setEmail(request.getEmail());
 
         cliente.setPassword(passwordEncoder.encode(request.getPassword()));
-        cliente.setNumConto(request.getNumConto());
         cliente.setRuolo("ROLE_USER");
-    cliente.setSaldoContoCorrente(request.getSaldoContoCorrente());
         clienteRepository.save(cliente);
 
         String jwtToken =
