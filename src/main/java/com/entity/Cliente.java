@@ -16,10 +16,15 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="cliente")
+
 public class Cliente implements UserDetails {
 
 
+    @OneToMany(mappedBy = "cliente")
+    private List<ContoCorrente> contiCorrenti;
 
+    @OneToMany(mappedBy = "cliente")
+    private List<CartaCredito>carteCredito;
 
     @Id
     @Column(name = "codCliente")
