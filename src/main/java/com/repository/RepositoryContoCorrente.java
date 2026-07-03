@@ -1,9 +1,11 @@
 package com.repository;
 
-import com.entity.Supervisore;
+import com.entity.ContoCorrente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RepositorySupervisore extends JpaRepository<Supervisore,Integer> {
+public interface RepositoryContoCorrente extends JpaRepository<ContoCorrente,Integer> {
+
+
 }

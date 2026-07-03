@@ -19,6 +19,8 @@ import java.util.List;
 
 public class Cliente implements UserDetails {
 
+    @OneToOne
+    private Utente utente;
 
     @OneToMany(mappedBy = "cliente")
     private List<ContoCorrente> contiCorrenti;

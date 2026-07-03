@@ -1,6 +1,7 @@
 package com.dto;
 
 
+import com.entity.Cliente;
 import lombok.*;
 
 @Getter
@@ -17,4 +18,6 @@ public class ClienteDto {
     private String numConto;
     private String ruolo;
 
+    public ClienteDto(Cliente cliente) {
+    }
 }
