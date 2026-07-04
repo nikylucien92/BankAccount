@@ -20,7 +20,7 @@ public class ServiceMovimentoImpl implements ServiceMovimento {
 
 
     @Override
-    public List<MovimentoDto> getMovimentiConto(Integer contoId) {
+    public List<MovimentoDto> getMovimentiConto() {
         List<Movimento>movimenti=repoMovimento.findAll();
         List<MovimentoDto> listaDto = new ArrayList<>();
 
@@ -41,13 +41,24 @@ public class ServiceMovimentoImpl implements ServiceMovimento {
         return listaDto;
     }
 
+
     @Override
     public Optional<MovimentoDto> getMovimentoById(Integer id) {
-        return Optional.empty();
+        return repoMovimento.findById(id).map(MovimentoDto :: new);
     }
+
 
     @Override
     public MovimentoDto salvaMovimento(MovimentoDto movimentoDto) {
-        return null;
+       Movimento movimento =new Movimento();
+        movimento.setDataMovimento(movimentoDto.getDataMovimento());
+        movimento.setTipo(movimentoDto.getTipo());
+        movimento.setImporto(movimentoDto.getImporto());
+        movimento.setCausale(movimentoDto.getCausale());
+        movimento.setSaldoDopoOperazione(movimentoDto.getSaldoDopoOperazione());
+
+         Movimento movimentoSalvato= repoMovimento.save(movimento);
+
+        return new MovimentoDto( movimentoSalvato);
     }
 }

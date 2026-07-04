@@ -1,6 +1,7 @@
 package com.dto;
 
 
+import com.entity.Movimento;
 import com.entity.TipoMovimento;
 import lombok.*;
 
@@ -26,4 +27,8 @@ public class MovimentoDto {
 
     private BigDecimal saldoDopoOperazione;
 
+
+    //??
+    public MovimentoDto(Movimento movimento) {
+    }
 }

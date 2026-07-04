@@ -36,10 +36,10 @@ public class AdminController {
         return ResponseEntity.ok(clienti);
     }
 
-
+/*
     @PutMapping("/clienti/{id}")
     public ResponseEntity<ClienteDto> updateCliente(){}
-
+*/
 
     @DeleteMapping("/clienti/{id}")
     public ResponseEntity<Void> deleteCliente(){}
@@ -48,14 +48,13 @@ public class AdminController {
     @PostMapping("/clienti/{id}/conto")
     public ResponseEntity<?> creaConto(){}
 
+    @PostMapping("/clienti/{id}/conto")
+    public ResponseEntity<?> eliminaConto(){}
+
 
     @PostMapping("/clienti/{id}/carta")
     public ResponseEntity<?> assegnaCarta(){}
 
-    /*
-    @GetMapping("/clienti/{id}/movimenti")
-    public List<MovimentoDto> getMovimenti(){}
-    */
 
 
 }

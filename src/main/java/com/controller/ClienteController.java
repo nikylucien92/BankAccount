@@ -33,7 +33,7 @@ public class ClienteController {
     @GetMapping("/{codCliente}")
     public ResponseEntity<ClienteDto> getClienteById(@PathVariable("codCliente") Integer clienteId) {
         Optional<ClienteDto> clienteDTOOptional = clienteService.getClienteById(clienteId);
-    System.out.println("entrato nel controller : " + clienteId);
+        System.out.println("entrato nel controller : " + clienteId);
         if (clienteDTOOptional.isPresent()) {
             return new ResponseEntity<>(clienteDTOOptional.get(), HttpStatus.OK);
         } else {
