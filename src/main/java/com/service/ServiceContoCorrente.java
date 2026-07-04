@@ -11,5 +11,5 @@ public interface ServiceContoCorrente  {
      Optional<ContoCorrenteDto> getContoCorrenteById(Integer id);
      ContoCorrenteDto salvaContoCorrente(ContoCorrenteDto contoCorrenteDto);
      void eliminaContoCorrente(Integer id);
-
+       // void modificaStatoConto();
 }

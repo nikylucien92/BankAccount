@@ -2,7 +2,6 @@ package com.controller;
 
 
 import com.dto.ContoCorrenteDto;
-import com.dto.MovimentoDto;
 import com.service.ServiceContoCorrente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

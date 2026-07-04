@@ -1,5 +1,6 @@
 package com.dto;
 
+import com.entity.CartaCredito;
 import lombok.*;
 
 import java.util.Date;
@@ -18,4 +19,6 @@ public class CartaCreditoDto {
     private String tipoCarta;
     private String password;
 
+    public CartaCreditoDto(CartaCredito cartaCredito) {
+    }
 }

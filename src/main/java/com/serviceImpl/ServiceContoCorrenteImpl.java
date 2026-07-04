@@ -38,7 +38,10 @@ public class ServiceContoCorrenteImpl implements ServiceContoCorrente {
         ContoCorrente conto=new ContoCorrente();
         conto.setIban(contoCorrenteDto.getIban());
         conto.setSaldo(contoCorrenteDto.getSaldo());
-
+        conto.setTipoConto(contoCorrenteDto.getTipoConto());
+        conto.setStato(contoCorrenteDto.getStato());
+        conto.setDataApertura(contoCorrenteDto.getDataApertura());
+        conto.setValuta(contoCorrenteDto.getValuta());
         ContoCorrente contoSalvato = repositoryContoCorrente.save(conto);
 
         return new ContoCorrenteDto(contoSalvato);

@@ -22,7 +22,6 @@ public class MovimentoController {
     public ResponseEntity<List<MovimentoDto>> getAllMovimenti(){
 
         return ResponseEntity.ok(serviceMovimento.getMovimentiConto());
-
     }
 
     @GetMapping("/id")
