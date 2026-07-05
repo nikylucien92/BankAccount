@@ -6,6 +6,9 @@ import com.dto.MovimentoDto;
 import com.entity.Cliente;
 import com.repository.RepositoryCliente;
 import com.service.AdminService;
+import com.service.ServiceCartaCredito;
+import com.service.ServiceContoCorrente;
+import com.service.ServiceMovimento;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,6 +19,15 @@ public class ServiceAdminImpl implements AdminService {
 
     @Autowired
     RepositoryCliente  repositoryCliente;
+
+    @Autowired
+    private ServiceContoCorrente contoCorrenteService;
+
+    @Autowired
+    private ServiceCartaCredito cartaCreditoService;
+
+    @Autowired
+    private ServiceMovimento movimentoService;
 
     public List<ClienteDto> getAllClienti(){
 
@@ -34,13 +46,25 @@ public class ServiceAdminImpl implements AdminService {
     }
 
     @Override
-    public ContoCorrenteDto creaContoCorrente(Integer id) {
-        return null;
+    public ContoCorrenteDto creaContoCorrente(ContoCorrenteDto contoCorrenteDto) {
+        return contoCorrenteService.salvaContoCorrente(contoCorrenteDto);
     }
 
     @Override
     public ClienteDto aggiornaCliente(Integer id, ClienteDto dto) {
-        return null;
+
+        Cliente cliente = repositoryCliente.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Cliente non trovato"));
+     cliente.setNome(dto.getNome());
+     cliente.setCognome(dto.getCognome());
+     cliente.setEmail(dto.getEmail());
+     cliente.setSaldoContoCorrente(dto.getSaldoContoCorrente());
+     cliente.setNumConto(dto.getNumConto());
+     cliente.setRuolo(dto.getRuolo());
+       Cliente clienteAggiornato=repositoryCliente.save(cliente);
+
+        return new ClienteDto(clienteAggiornato);
     }
 
     @Override
@@ -53,30 +77,10 @@ public class ServiceAdminImpl implements AdminService {
         return List.of();
     }
 
+    @Override
+    public List<ContoCorrenteDto> getContiCliente(Integer idCliente) {
+        return List.of();
+    }
+
 }
-/* CREA CONTO
-* trova Cliente
 
-↓
-
-crea ContoCorrente
-
-↓
-
-genera IBAN
-
-↓
-
-saldo = 0
-
-↓
-
-stato = ATTIVO
-
-↓
-
-salva
-
-↓
-
-ritorna DTO*/

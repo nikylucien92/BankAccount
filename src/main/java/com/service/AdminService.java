@@ -14,11 +14,13 @@ public interface AdminService {
 
     public Optional<ClienteDto> getClienteById(Integer idCliente);
 
-    public ContoCorrenteDto creaContoCorrente(Integer id);
+    public ContoCorrenteDto creaContoCorrente(ContoCorrenteDto contoCorerntDto);
 
     public ClienteDto aggiornaCliente(Integer id, ClienteDto dto);
 
     public void disattivaCliente(Integer id);
 
     public List<MovimentoDto> getMovimentiCliente(Integer idCliente);
+
+    public List<ContoCorrenteDto> getContiCliente(Integer idCliente);
 }
