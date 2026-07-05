@@ -37,13 +37,10 @@ public class CartaCredito {
     @Column(name = "dataScadenza")
     private Date dataScadenza;
 
-    //attiva ,bloccata ,scaduta
-    @Column(name = "stato")
-    private String stato;
 
-    //addebito o credito o prepagata
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipoCarta")
-    private String tipoCarta;
+    private StatoCarta statoCarta;
 
     // dato sensibile ,cifrare e inserire solo nel db ,e non nel login, poiche serve solo per prelevare questa password
     @Column(name = "password")

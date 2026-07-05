@@ -38,13 +38,14 @@ public class ContoCorrente{
     private String tipoConto;
 
     //attivo o inattivo
+    @Enumerated(EnumType.STRING)
     @Column(name = "stato")
-    private String stato;
+    private StatoConto stato;
 
     @Column(name = "dataApertura")
     private Date dataApertura;
 
-    //euro altro?
-    private double valuta;
+    @Column(name = "valuta")
+    private String valuta;
 
 }

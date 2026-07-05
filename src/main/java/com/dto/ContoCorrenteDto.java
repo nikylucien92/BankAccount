@@ -2,6 +2,7 @@ package com.dto;
 
 import com.entity.Cliente;
 import com.entity.ContoCorrente;
+import com.entity.StatoConto;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,9 +22,9 @@ public class ContoCorrenteDto {
     private String iban;
     private double saldo;
     private String tipoConto;
-    private String stato;
+    private StatoConto stato;
     private Date dataApertura;
-    private double valuta;
+    private String valuta;
 
     public ContoCorrenteDto(ContoCorrente contoCorrente) {
     }
