@@ -16,6 +16,14 @@ import java.time.LocalDateTime;
 @Table(name = "movimento")
 public class Movimento {
 
+    @ManyToOne
+    @JoinColumn(name = "iban")
+    private ContoCorrente contoCorrente;
+
+    @ManyToOne
+    @JoinColumn(name="numCarta")
+    private CartaCredito cartaCredito;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -31,7 +39,5 @@ public class Movimento {
 
     private BigDecimal saldoDopoOperazione;
 
-    @ManyToOne
-    @JoinColumn(name = "conto_corrente_id")
-    private ContoCorrente contoCorrente;
+
 }

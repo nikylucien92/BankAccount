@@ -12,7 +12,8 @@ import java.util.Date;
 @Data
 public class CartaCreditoDto {
 
-    private Integer numCarta;
+    private Integer idCarta;
+    private String numCarta;
     private String circuito;
     private Date dataScadenza;
     private String stato;

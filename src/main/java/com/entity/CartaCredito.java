@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,13 +17,19 @@ public class CartaCredito {
 
 
     @ManyToOne
-    @JoinColumn(name="codCliente")
-    private  Cliente cliente;
+    @JoinColumn(name="idConto")
+    private  ContoCorrente contoCorrente;
+
+    @OneToMany(mappedBy = "cartaCredito")
+    private List<Movimento> listaMovimentiCarta;
 
     @Id
-    @Column(name = "numCarta")
+    @Column(name = "idCarta")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer numCarta;
+    private Integer idCarta;
+
+    @Column(name = "numCarta")
+    private String numCarta;
 
     @Column(name = "circuito")
     private String circuito;

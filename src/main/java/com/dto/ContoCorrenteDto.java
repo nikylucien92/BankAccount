@@ -17,7 +17,8 @@ import java.util.Date;
 @Data
 public class ContoCorrenteDto {
 
-    private Integer iban;
+    private Integer idConto;
+    private String iban;
     private double saldo;
     private String tipoConto;
     private String stato;

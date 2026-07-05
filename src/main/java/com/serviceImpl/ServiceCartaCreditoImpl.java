@@ -32,6 +32,7 @@ public class ServiceCartaCreditoImpl implements ServiceCartaCredito {
     public CartaCreditoDto salvaCartaCredito(CartaCreditoDto cartaCreditoDto) {
 
         CartaCredito cartaCredito=new CartaCredito();
+        cartaCredito.setIdCarta(cartaCreditoDto.getIdCarta());
         cartaCredito.setNumCarta(cartaCreditoDto.getNumCarta());
         cartaCredito.setTipoCarta(cartaCreditoDto.getTipoCarta());
         cartaCredito.setCircuito(cartaCreditoDto.getCircuito());

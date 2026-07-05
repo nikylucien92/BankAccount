@@ -13,14 +13,14 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/api")
 @PreAuthorize("hasRole('ADMIN')")
 public class AdminController {
 
     @Autowired
     private ServiceCliente serviceCliente;
 
-    @GetMapping("/{id}")
+    @GetMapping("/cliente/{id}")
     public ResponseEntity<ClienteDto> getClienteById(@PathVariable Integer id) {
 
         return serviceCliente.getClienteById(id)
@@ -29,7 +29,7 @@ public class AdminController {
     }
 
 
-    @GetMapping("/clienti")
+    @GetMapping("/cliente")
     public ResponseEntity<List<ClienteDto>> getAllClienti(){
 
         List<ClienteDto>clienti= serviceCliente.getAllClienti();
@@ -41,18 +41,18 @@ public class AdminController {
     public ResponseEntity<ClienteDto> updateCliente(){}
 */
 
-    @DeleteMapping("/clienti/{id}")
+    @DeleteMapping("/cliente/{id}")
     public ResponseEntity<Void> deleteCliente(){}
 
 
-    @PostMapping("/clienti/{id}/conto")
+    @PostMapping("/cliente/{id}/contoCorrente")
     public ResponseEntity<?> creaConto(){}
 
-    @PostMapping("/clienti/{id}/conto")
+    @PostMapping("/cliente/{id}/contoCorrente")
     public ResponseEntity<?> eliminaConto(){}
 
 
-    @PostMapping("/clienti/{id}/carta")
+    @PostMapping("/cliente/{id}/cartaCredito")
     public ResponseEntity<?> assegnaCarta(){}
 
 

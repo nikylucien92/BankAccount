@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,10 +19,16 @@ public class ContoCorrente{
     @JoinColumn(name="codCliente")
     private Cliente cliente ;
 
+    @OneToMany(mappedBy = "contoCorrente")
+    private List<Movimento> listaMovimentiConto;
+
     @Id
-    @Column(name = "iban")
+    @Column(name="idConto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer iban;
+   private Integer idConto;
+
+    @Column(unique=true ,name="iban")
+    private String iban;
 
     @Column(name = "saldo")
     private double saldo;
