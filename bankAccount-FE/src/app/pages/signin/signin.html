@@ -1,0 +1,123 @@
+<div class="bg-[#F5F7FA] w-screen h-screen flex flex-col justify-center items-center">
+  <form
+    (ngSubmit)="onSignin(user)"
+    class="bg-white w-xl flex flex-col items-center rounded-[30px] px-11 py-7.75"
+  >
+    <!-- icona del sito -->
+    <img [ngSrc]="logoUrl" [alt]="logoAlt" width="183" height="36" priority />
+    <!-- testo login -->
+    <h1 class="fw-semibold text-[25px] mb-8">Registrati</h1>
+    <!-- nome -->
+    <fieldset class="fieldset w-sm mb-3">
+      <label class="label gap-0" for="nameUser"
+        >Nome completo<span class="text-[#FE5C73]">*</span></label
+      >
+      <input
+        type="text"
+        id="nameUser"
+        name="nameUser"
+        class="input w-full"
+        placeholder="Inserire nome completo"
+        [(ngModel)]="user.fullName"
+      />
+    </fieldset>
+    <!-- input email -->
+    <fieldset class="fieldset w-sm mb-3">
+      <label class="label gap-0" for="emailUser">Email<span class="text-[#FE5C73]">*</span></label>
+      <input
+        type="email"
+        id="emailUser"
+        name="emailUser"
+        class="input w-full"
+        placeholder="Inserire email"
+        [(ngModel)]="user.email"
+      />
+    </fieldset>
+    <div class="flex gap-3 w-sm mb-3">
+      <!-- data nascita -->
+      <fieldset class="fieldset w-[50%]">
+        <label class="label gap-0" for="dateUser">Data di nascita</label>
+        <input
+          type="date"
+          id="dateUser"
+          name="dateUser"
+          class="input w-full"
+          [(ngModel)]="user.birthDate"
+        />
+      </fieldset>
+      <!-- telefono -->
+      <fieldset class="fieldset w-[50%]">
+        <label class="label gap-0" for="dateUser">Telefono</label>
+        <input
+          type="date"
+          id="dateUser"
+          name="dateUser"
+          class="input w-full"
+          [(ngModel)]="user.phone"
+        />
+      </fieldset>
+    </div>
+    <!-- indirizzo -->
+    <fieldset class="fieldset w-sm mb-3">
+      <label class="label" for="pswUser">Indirizzo</label>
+      <input
+        type="password"
+        id="pswUser"
+        name="pswUser"
+        class="input w-full"
+        placeholder="Inserire password"
+        [(ngModel)]="user.password"
+      />
+    </fieldset>
+    <div class="flex gap-3 w-sm mb-3">
+      <!-- provincia -->
+      <fieldset class="fieldset w-[50%]">
+        <label class="label gap-0" for="provinceUser">Provincia</label>
+        <input
+          type="text"
+          id="provinceUser"
+          name="provinceUser"
+          class="input w-full"
+          [(ngModel)]="user.province"
+          placeholder="Inserire provincia"
+        />
+      </fieldset>
+      <!-- telefono -->
+      <fieldset class="fieldset w-[50%]">
+        <label class="label gap-0" for="cityUser">Città</label>
+        <input
+          type="text"
+          id="cityUser"
+          name="cityUser"
+          class="input w-full"
+          [(ngModel)]="user.city"
+          placeholder="Inserire città"
+        />
+      </fieldset>
+    </div>
+    <!-- input psw -->
+    <fieldset class="fieldset w-sm mb-1">
+      <label class="label gap-0" for="pswUser">Password<span class="text-[#FE5C73]">*</span></label>
+      <input
+        type="password"
+        id="pswUser"
+        name="pswUser"
+        class="input w-full"
+        placeholder="Inserire password"
+        [(ngModel)]="user.password"
+      />
+    </fieldset>
+    <div class="flex w-sm justify-between mt-1">
+      <!-- hai già un account? -->
+      <div class="text-end">
+        <a routerLink="/" class="text-[#1814F3] hover:text-[#1814f39e] fw-medium text-[11px]"
+          >Hai già un account?
+        </a>
+      </div>
+    </div>
+    <!-- button submit -->
+    <div class="w-sm">
+      <button class="w-full btn btn-primary" type="submit">Registrati</button>
+    </div>
+  </form>
+</div>

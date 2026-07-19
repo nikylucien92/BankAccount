@@ -1,0 +1,59 @@
+<div class="bg-[#F5F7FA] w-screen h-screen flex flex-col justify-center items-center">
+  <form
+    (ngSubmit)="onLogin(user)"
+    class="bg-white w-xl flex flex-col items-center rounded-[30px] px-11 py-7.75"
+  >
+    <!-- icona del sito -->
+    <img [ngSrc]="logoUrl" [alt]="logoAlt" width="183" height="36" priority />
+    <!-- testo login -->
+    <h1 class="fw-semibold text-[25px] mb-8">Login</h1>
+    <!-- input email -->
+    <fieldset class="fieldset w-sm mb-3">
+      <label class="label" for="emailUser">Email</label>
+      <input
+        type="email"
+        id="emailUser"
+        name="emailUser"
+        class="input validator w-full"
+        placeholder="Inserire email"
+        [(ngModel)]="user.email"
+        [pattern]="regexService.emailRegex"
+        required
+      />
+    </fieldset>
+    <!-- input psw -->
+    <fieldset class="fieldset w-sm mb-1">
+      <label class="label" for="pswUser">Password</label>
+      <input
+        type="password"
+        id="pswUser"
+        name="pswUser"
+        class="input validator w-full"
+        placeholder="Inserire password"
+        [(ngModel)]="user.password"
+        minlength="8"
+        required
+      />
+    </fieldset>
+    <div class="flex w-sm justify-between mt-1">
+      <!-- hai dimenticato la psw? -->
+      <div class="text-end">
+        <a
+          routerLink="/reset-password"
+          class="text-[#1814F3] hover:text-[#1814f39e] fw-medium text-[11px]"
+          >Hai dimenticato la password?
+        </a>
+      </div>
+      <!-- non hai un account? -->
+      <div class="text-end">
+        <a routerLink="/signin" class="text-[#1814F3] hover:text-[#1814f39e] fw-medium text-[11px]"
+          >Non hai un account?
+        </a>
+      </div>
+    </div>
+    <!-- button submit -->
+    <div class="w-sm">
+      <button class="w-full btn btn-primary" type="submit">Accedi</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: false;
+  /*includere solo alcuni componenti di daisyUI con include*/
+  --color-error: #FE5C73;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #333b69;
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+label {
+  @apply text-[#232323] text-[13px];
+}
+
+input {
+  @apply border border-[#DFEAF2] rounded-[15px] text-[12px] placeholder:text-[12px] text-[#718EBF] placeholder:text-[#718EBF];
+}
+
+.btn-primary {
+  @apply bg-[#1814F3] text-white rounded-[9px] font-medium text-[15px] py-2.75 px-6.5;
+}
+
+input.ng-invalid.ng-touched{
+  border: 1px solid #FE5C73;
+}
