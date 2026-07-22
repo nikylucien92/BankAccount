@@ -10,25 +10,31 @@ export const routes: Routes = [
   {
     path: '',
     component: Login,
+    title: 'Login',
   },
   {
     path: 'signin',
     component: Signin,
+    title: 'Registrati',
   },
   {
     path: 'reset-password',
     component: ResetPsw,
+    title: 'Hai dimenticato la password?',
   },
   {
     path: 'dashboard',
     component: Dashboard,
+    title: 'Dashboard',
   },
   {
     path: 'profile',
     component: Profile,
+    title: 'Profilo',
   },
   {
     path: 'transactions',
     component: Transaction,
+    title: 'Transazioni',
   },
 ];

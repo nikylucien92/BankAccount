@@ -47,26 +47,27 @@
       </fieldset>
       <!-- telefono -->
       <fieldset class="fieldset w-[50%]">
-        <label class="label gap-0" for="dateUser">Telefono</label>
+        <label class="label gap-0" for="telUser">Telefono</label>
         <input
-          type="date"
-          id="dateUser"
-          name="dateUser"
+          type="tel"
+          id="telUser"
+          name="telUser"
           class="input w-full"
+          placeholder="Inserire telefono"
           [(ngModel)]="user.phone"
         />
       </fieldset>
     </div>
     <!-- indirizzo -->
     <fieldset class="fieldset w-sm mb-3">
-      <label class="label" for="pswUser">Indirizzo</label>
+      <label class="label" for="addressUser">Indirizzo</label>
       <input
         type="password"
-        id="pswUser"
-        name="pswUser"
+        id="addressUser"
+        name="addressUser"
         class="input w-full"
-        placeholder="Inserire password"
-        [(ngModel)]="user.password"
+        placeholder="Inserire indirizzo"
+        [(ngModel)]="user.address"
       />
     </fieldset>
     <div class="flex gap-3 w-sm mb-3">
@@ -82,7 +83,7 @@
           placeholder="Inserire provincia"
         />
       </fieldset>
-      <!-- telefono -->
+      <!-- città -->
       <fieldset class="fieldset w-[50%]">
         <label class="label gap-0" for="cityUser">Città</label>
         <input

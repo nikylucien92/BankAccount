@@ -1,1 +1,84 @@
-<p>header works!</p>
+<div class="drawer xl:drawer-open">
+  <input id="my-drawer-4" type="checkbox" class="drawer-toggle" checked />
+  <div class="drawer-content">
+    <!-- Navbar -->
+    <nav class="navbar w-full lg:min-h-[85px] bg-base-300 border-b border-b-[#E6EFF5]">
+      <label for="my-drawer-4" aria-label="open sidebar" class="btn btn-square btn-ghost">
+        <!-- Sidebar toggle icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          stroke-linejoin="round"
+          stroke-linecap="round"
+          stroke-width="2"
+          fill="none"
+          stroke="currentColor"
+          class="my-1.5 inline-block size-4"
+        >
+          <path
+            d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+          ></path>
+          <path d="M9 4v16"></path>
+          <path d="M14 10l2 2l-2 2"></path>
+        </svg>
+      </label>
+      <div class="px-4">
+        <h1 class="font-semibold text-lg text-[#343C6A]">
+          {{ title() }}
+        </h1>
+      </div>
+    </nav>
+    <!-- Page content here -->
+    <div class="p-4">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <div class="drawer-side is-drawer-close:overflow-visible">
+    <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+    <div
+      class="flex min-h-full flex-col items-start bg-base-200 border-r border-r-[#E6EFF5] is-drawer-close:w-14 is-drawer-open:w-64"
+    >
+      <!-- sidebar -->
+      <ul class="menu w-full grow is-drawer-open:p-0">
+        <!-- logo -->
+        <li
+          class="is-drawer-open:lg:pt-6.5 is-drawer-open:lg:pb-5.75 is-drawer-open:lg:pe-4.25 is-drawer-open:lg:ps-7.5"
+        >
+          <a routerLink="/dashboard">
+            <!-- logo lg -->
+            <img
+              class="is-drawer-close:hidden"
+              [ngSrc]="logoLg"
+              [alt]="logoAlt"
+              width="183"
+              height="36"
+              priority
+            />
+            <!-- logo sm -->
+            <span class="is-drawer-open:hidden is-drawer-close:lg:mb-5.75">
+              <img [ngSrc]="logoSm" [alt]="logoAlt" width="80" height="36" priority />
+            </span>
+          </a>
+        </li>
+        @for (item of headerItems; track $index) {
+          <li class="h-12.5 w-full inline-block! mb-5 is-drawer-open:border-l-[5px] is-drawer-open:border-l-transparent" routerLinkActive="border-l-[#2D60FF]!">
+            <a class="flex h-full gap-5 is-drawer-open:lg:ps-7.5" [routerLink]="item.path" routerLinkActive #rla="routerLinkActive">
+              <img
+                class="text-white"
+                [ngSrc]="rla.isActive ? item.iconActive : item.iconDefault"
+                [alt]="`icona di ${item.title}`"
+                width="20"
+                height="20"
+                priority
+              />
+              <span class="is-drawer-close:hidden text-base font-medium text-[#B1B1B1]" routerLinkActive="text-[#1814F3]!">
+                {{ item.title }}
+              </span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</div>

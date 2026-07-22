@@ -1,4 +1,7 @@
 @if (isHeaderShown) {
-  <app-header></app-header>
+  <app-header>
+    <router-outlet />
+  </app-header>
+} @else {
+  <router-outlet />
 }
-<router-outlet />
