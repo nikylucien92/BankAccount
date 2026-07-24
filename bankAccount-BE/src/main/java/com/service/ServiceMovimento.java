@@ -7,9 +7,14 @@ import java.util.Optional;
 
 public interface ServiceMovimento {
 
-    List<MovimentoDto> getMovimentiConto();
+    List<MovimentoDto> getListaMovimenti();
 
     Optional<MovimentoDto> getMovimentoById(Integer id);
 
+    List<MovimentoDto> getMovimentiConto(Integer idConto);
+
     MovimentoDto salvaMovimento(MovimentoDto movimentoDto);
+
+    void eliminaMovimento(Integer id);
+
 }

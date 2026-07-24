@@ -1,11 +1,9 @@
 package com.dto;
 
 
-import com.entity.Cliente;
+import com.entity.Ruolo;
 import lombok.*;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -14,10 +12,8 @@ public class ClienteDto {
     private String nome;
     private String cognome;
     private String email;
-    private int saldoContoCorrente;
-    private String numConto;
-    private String ruolo;
+    private Ruolo ruolo;
+    private String password;
 
-    public ClienteDto(Cliente cliente) {
-    }
+
 }

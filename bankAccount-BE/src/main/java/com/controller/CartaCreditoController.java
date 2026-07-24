@@ -1,8 +1,7 @@
 package com.controller;
 
 
-import com.dto.CartaCreditoDto;
-import com.dto.ContoCorrenteDto;
+import com.dto.CartaCreditoRequestDto;
 import com.service.ServiceCartaCredito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,16 +20,16 @@ public class CartaCreditoController {
 
 
     @GetMapping
-    public ResponseEntity<List<CartaCreditoDto>> getAllCartaCredito(){
+    public ResponseEntity<List<CartaCreditoRequestDto>> getAllCartaCredito(){
 
         return ResponseEntity.ok(serviceCartaCredito.getListaCartaCredito());
     }
 
 
-    @GetMapping("/id")
+    @GetMapping("/{id}")
     public ResponseEntity getCartaById(@PathVariable("id") Integer id){
 
-        Optional<CartaCreditoDto> cartaOptionalDto=serviceCartaCredito.getCartaCreditoById(id);
+        Optional<CartaCreditoRequestDto> cartaOptionalDto=serviceCartaCredito.getCartaCreditoById(id);
         if (cartaOptionalDto.isPresent()) {
             return new ResponseEntity<>(cartaOptionalDto.get(), HttpStatus.OK);
         } else {
@@ -38,10 +37,10 @@ public class CartaCreditoController {
         }
     }
 
-    @PostMapping("/salvaCartaCredito")
-    public ResponseEntity salvaCartaCredito(CartaCreditoDto cartaCreditoDto)
+    @PostMapping
+    public ResponseEntity salvaCartaCredito(@RequestBody CartaCreditoRequestDto cartaCreditoRequestDto)
     {
-        CartaCreditoDto cartaSalvata=serviceCartaCredito.salvaCartaCredito(cartaCreditoDto);
+        CartaCreditoRequestDto cartaSalvata=serviceCartaCredito.salvaCartaCredito(cartaCreditoRequestDto);
         return new ResponseEntity<>(cartaSalvata ,HttpStatus.CREATED);
     }
 

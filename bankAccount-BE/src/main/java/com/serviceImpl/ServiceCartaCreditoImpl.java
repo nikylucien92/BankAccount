@@ -1,6 +1,6 @@
 package com.serviceImpl;
 
-import com.dto.CartaCreditoDto;
+import com.dto.CartaCreditoRequestDto;
 import com.entity.CartaCredito;
 import com.repository.RepositoryCartaCredito;
 import com.service.ServiceCartaCredito;
@@ -17,29 +17,27 @@ public class ServiceCartaCreditoImpl implements ServiceCartaCredito {
     RepositoryCartaCredito repositoryConto;
 
     @Override
-    public List<CartaCreditoDto> getListaCartaCredito() {
+    public List<CartaCreditoRequestDto> getListaCartaCredito() {
 
-        return repositoryConto.findAll().stream().map(CartaCreditoDto :: new).toList();
+        return repositoryConto.findAll().stream().map(CartaCreditoRequestDto:: new).toList();
     }
 
     @Override
-    public Optional<CartaCreditoDto> getCartaCreditoById(Integer id) {
-        return repositoryConto.findById(id).map(CartaCreditoDto :: new);
+    public Optional<CartaCreditoRequestDto> getCartaCreditoById(Integer id) {
+        return repositoryConto.findById(id).map(CartaCreditoRequestDto:: new);
     }
 
 
     @Override
-    public CartaCreditoDto salvaCartaCredito(CartaCreditoDto cartaCreditoDto) {
+    public CartaCreditoRequestDto salvaCartaCredito(CartaCreditoRequestDto cartaCreditoRequestDto) {
 
         CartaCredito cartaCredito=new CartaCredito();
-        cartaCredito.setIdCarta(cartaCreditoDto.getIdCarta());
-        cartaCredito.setNumCarta(cartaCreditoDto.getNumCarta());
-        cartaCredito.setStatoCarta(cartaCreditoDto.getStato());
-        cartaCredito.setCircuito(cartaCreditoDto.getCircuito());
-        cartaCredito.setPassword(cartaCreditoDto.getPassword());
-        cartaCredito.setDataScadenza(cartaCreditoDto.getDataScadenza());
-
+        cartaCredito.setIdCarta(cartaCreditoRequestDto.getIdCarta());
+        cartaCredito.setNumCarta(cartaCreditoRequestDto.getNumCarta());
+        cartaCredito.setCircuito(cartaCreditoRequestDto.getCircuito());
+        cartaCredito.setDataScadenza(cartaCreditoRequestDto.getDataScadenza());
+        cartaCredito.setStatoCarta(cartaCreditoRequestDto.getStato());
             CartaCredito cartaCreditoSalvato= repositoryConto.save(cartaCredito);
-            return new CartaCreditoDto(cartaCreditoSalvato);
+            return new CartaCreditoRequestDto(cartaCreditoSalvato);
     }
 }

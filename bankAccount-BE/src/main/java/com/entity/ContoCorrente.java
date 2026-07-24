@@ -1,25 +1,30 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import jakarta.persistence.Id;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
-@Data
-@Table(name="contoCorrente")
+@Table(name="contoCorrente",schema = "bank")
 public class ContoCorrente{
 
-    @ManyToOne
+    //Con le relazioni bidirezionali (Cliente -> ContoCorrente -> Cliente) rischi un loop infinito quando restituisci JSON
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="codCliente")
     private Cliente cliente ;
 
-    @OneToMany(mappedBy = "contoCorrente")
+    @OneToMany(mappedBy = "contoCorrente" ,cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Movimento> listaMovimentiConto;
 
     @Id
@@ -27,15 +32,18 @@ public class ContoCorrente{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
    private Integer idConto;
 
-    @Column(unique=true ,name="iban")
+    @Column(unique=true ,name="iban",nullable = false)
     private String iban;
 
-    @Column(name = "saldo")
-    private double saldo;
+    @Column(name="numConto" ,unique = true)
+    private String numConto;
 
-    //ordinario giovani o aziendale
+    //double perde di precisione
+    @Column(name = "saldo")
+    private BigDecimal saldo;
+
     @Column(name = "tipoConto")
-    private String tipoConto;
+    private TipoConto tipoConto;
 
     //attivo o inattivo
     @Enumerated(EnumType.STRING)
@@ -43,7 +51,7 @@ public class ContoCorrente{
     private StatoConto stato;
 
     @Column(name = "dataApertura")
-    private Date dataApertura;
+    private LocalDate dataApertura;
 
     @Column(name = "valuta")
     private String valuta;

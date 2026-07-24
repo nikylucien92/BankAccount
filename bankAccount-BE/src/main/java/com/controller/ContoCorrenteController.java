@@ -15,8 +15,12 @@ import java.util.Optional;
 @RequestMapping("/api/contoCorrente")
 public class ContoCorrenteController {
 
-    @Autowired
-    ServiceContoCorrente serviceContoCorrente;
+
+   private final  ServiceContoCorrente serviceContoCorrente;
+
+    public ContoCorrenteController(ServiceContoCorrente serviceContoCorrente) {
+        this.serviceContoCorrente = serviceContoCorrente;
+    }
 
     @GetMapping
     public ResponseEntity<List<ContoCorrenteDto>>getAllContoCorrente(){

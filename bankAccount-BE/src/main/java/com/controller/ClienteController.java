@@ -12,41 +12,58 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@AllArgsConstructor
 @RestController
 @RequestMapping("/api/cliente")
 public class ClienteController {
 
-    @Autowired
-    private ServiceCliente clienteService;
+    private final ServiceCliente serviceCliente;
+    public ClienteController(ServiceCliente serviceCliente) {
+        this.serviceCliente = serviceCliente; }
 
-    @PostMapping("/creaCliente")
-    public ResponseEntity<ClienteDto> creaCliente(@RequestBody ClienteDto clienteDTO)
-    {
-
-        ClienteDto clienteSalvato= clienteService.creaCliente(clienteDTO);
-        return  new ResponseEntity<>(clienteSalvato , HttpStatus.CREATED);
-
-    }
-
-
-    @GetMapping("/{codCliente}")
-    public ResponseEntity<ClienteDto> getClienteById(@PathVariable("codCliente") Integer clienteId) {
-        Optional<ClienteDto> clienteDTOOptional = clienteService.getClienteById(clienteId);
-        System.out.println("entrato nel controller : " + clienteId);
-        if (clienteDTOOptional.isPresent()) {
-            return new ResponseEntity<>(clienteDTOOptional.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-    }
-
+    /** * Restituisce tutti i clienti. * * GET /cliente */
     @GetMapping
-    public ResponseEntity<List<ClienteDto>> getAllClienti(){
+    public ResponseEntity<List<ClienteDto>> findAll() {
+        return ResponseEntity.ok( serviceCliente.findAll() ); }
 
-        List<ClienteDto> clienti = clienteService.getAllClienti();
 
-        return ResponseEntity.ok(clienti);
+
+    /** * Restituisce un cliente tramite id. * * GET /cliente/{id} */
+    @GetMapping("/{id}")
+    public ResponseEntity<ClienteDto> findById( @PathVariable Integer id) {
+
+        return ResponseEntity.ok( serviceCliente.findById(id) );
+
+    }
+
+
+    /** * Restituisce un cliente tramite email. * * GET /cliente/email/{email} */
+    @GetMapping("/email/{email}") public ResponseEntity<ClienteDto> findByEmail( @PathVariable String email)
+    {
+        return ResponseEntity.ok( serviceCliente.findByEmail(email) );
+     }
+
+
+    /** * Inserisce un nuovo cliente. * * POST /cliente */
+    @PostMapping public ResponseEntity<ClienteDto> save(  @RequestBody ClienteDto clienteDto)
+
+    {
+        ClienteDto clienteSalvato = serviceCliente.save(clienteDto); return new ResponseEntity<>( clienteSalvato, HttpStatus.CREATED );
+    }
+
+
+    /** * Aggiorna un cliente. * * PUT /cliente/{id} */
+    @PutMapping("/{id}") public ResponseEntity<ClienteDto> update( @PathVariable Integer id, @RequestBody ClienteDto clienteDto)
+
+    {
+        return ResponseEntity.ok( serviceCliente.update(id, clienteDto) );
+
+    }
+
+    /** * Elimina un cliente. * * DELETE /cliente/{id} */
+    @DeleteMapping("/{id}") public ResponseEntity<Void> delete( @PathVariable Integer id)
+
+    {
+        serviceCliente.delete(id); return ResponseEntity.noContent().build();
 
     }
 

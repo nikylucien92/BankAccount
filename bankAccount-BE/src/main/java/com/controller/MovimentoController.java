@@ -3,7 +3,6 @@ package com.controller;
 
 import com.dto.MovimentoDto;
 import com.service.ServiceMovimento;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,16 +14,20 @@ import java.util.Optional;
 @RequestMapping("/api/movimenti")
 public class MovimentoController {
 
-    @Autowired
-    private ServiceMovimento serviceMovimento;
+    private final ServiceMovimento serviceMovimento;
 
-    @GetMapping
-    public ResponseEntity<List<MovimentoDto>> getAllMovimenti(){
-
-        return ResponseEntity.ok(serviceMovimento.getMovimentiConto());
+    public MovimentoController(ServiceMovimento serviceMovimento) {
+        this.serviceMovimento=serviceMovimento;
     }
 
-    @GetMapping("/id")
+
+    @GetMapping("/conto/id")
+    public ResponseEntity<List<MovimentoDto>> getAllMovimenti(@PathVariable("id") Integer id){
+
+        return ResponseEntity.ok(serviceMovimento.getMovimentiConto(id));
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity getMovimentoById(@PathVariable("id") Integer id){
 
         Optional<MovimentoDto>movimentoDtoOptional=serviceMovimento.getMovimentoById(id);
@@ -36,8 +39,8 @@ public class MovimentoController {
 
     }
 
-    @PostMapping("/salvaMovimento")
-    public ResponseEntity salvaMovimento(MovimentoDto movimentoDto)
+    @PostMapping
+    public ResponseEntity salvaMovimento(@RequestBody MovimentoDto movimentoDto)
     {
         MovimentoDto movimentoSalvato= serviceMovimento.salvaMovimento(movimentoDto);
         return  new ResponseEntity<>(movimentoSalvato , HttpStatus.CREATED);

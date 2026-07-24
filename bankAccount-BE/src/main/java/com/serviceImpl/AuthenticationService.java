@@ -4,6 +4,7 @@ import com.authentication.JwtService;
 import com.authentication.AuthenticationResponse;
 import com.authentication.LoginRequest;
 import com.authentication.RegisterRequest;
+import com.entity.Ruolo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,7 @@ public class AuthenticationService {
         cliente.setEmail(request.getEmail());
 
         cliente.setPassword(passwordEncoder.encode(request.getPassword()));
-        cliente.setRuolo("ROLE_USER");
+        cliente.setRuolo(Ruolo.RUOLO_CLIENTE);
         clienteRepository.save(cliente);
 
         String jwtToken =

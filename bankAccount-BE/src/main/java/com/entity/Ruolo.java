@@ -1,7 +1,6 @@
 package com.entity;
 
 public enum Ruolo {
-    ADMIN,
-    UTENTE,
-    CLIENTE
+   RUOLO_ADMIN,
+    RUOLO_CLIENTE
 }

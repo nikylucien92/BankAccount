@@ -14,9 +14,8 @@ public class ClienteMapper {
                 cliente.getNome(),
                 cliente.getCognome(),
                 cliente.getEmail(),
-                cliente.getSaldoContoCorrente(),
-                cliente.getNumConto(),
-                cliente.getRuolo()
+                cliente.getRuolo(),
+                cliente.getPassword()
 
         );
     }
@@ -29,9 +28,8 @@ public class ClienteMapper {
         cliente.setNome(clienteDto.getNome());
         cliente.setCognome(clienteDto.getCognome());
         cliente.setEmail(clienteDto.getEmail());
-        cliente.setSaldoContoCorrente(clienteDto.getSaldoContoCorrente());
-        cliente.setNumConto(clienteDto.getNumConto());
         cliente.setRuolo(clienteDto.getRuolo());
+        cliente.setPassword(clienteDto.getPassword());
 
         return cliente;
     }

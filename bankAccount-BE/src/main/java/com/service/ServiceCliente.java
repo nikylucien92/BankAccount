@@ -3,16 +3,18 @@ package com.service;
 import com.dto.ClienteDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface ServiceCliente {
 
-    ClienteDto creaCliente(ClienteDto clienteDto);
-    Optional<ClienteDto> getClienteById(Integer clienteId);
+    List<ClienteDto> findAll();
 
-    List<ClienteDto> getAllClienti();
+    ClienteDto findById(Integer id);
 
-    ClienteDto updateCliente(Integer codCliente,ClienteDto clienteDto);
+    ClienteDto save(ClienteDto dto);
 
-    void deleteCliente(Integer codCliente);
+    ClienteDto update(Integer id, ClienteDto dto);
+
+    void delete(Integer id);
+
+    ClienteDto findByEmail(String email);
 }

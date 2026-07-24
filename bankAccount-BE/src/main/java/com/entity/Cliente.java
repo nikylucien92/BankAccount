@@ -1,12 +1,13 @@
 package com.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import jakarta.persistence.Id;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,17 +15,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Data
-@Table(name="cliente")
-
+@Table(name="cliente",schema = "bank")
+@Getter
+@Setter
 public class Cliente implements UserDetails {
 
-    @OneToOne
-    private Utente utente;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<ContoCorrente> contiCorrenti;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<CartaCredito>carteCredito;
 
@@ -39,25 +39,20 @@ public class Cliente implements UserDetails {
     @Column(name = "cognome")
     private String cognome;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true, nullable = false)
     private String email;
-
-    @Column(name = "saldoContoCorrente")
-    private int saldoContoCorrente;
-
-    @Column(name = "numConto")
-    private String numConto;
+   // Così eviti due utenti con la stessa email.
 
     @Column(name = "ruolo")
-    private String ruolo;
+    private Ruolo ruolo;
 
-    @Column(name = "password")
+    @Column(name = "password" ,nullable = false)
     private String password;
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(ruolo));
+        return List.of(new SimpleGrantedAuthority(ruolo.name()));
         //il return , ritorna un oggetto di un tipo di ruolo , che viene usato nella nostra classe enum di ADMIN,USER per le autorizzazioni
     }
 

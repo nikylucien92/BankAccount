@@ -2,108 +2,109 @@ package com.serviceImpl;
 
 import com.dto.ClienteDto;
 import com.entity.Cliente;
+import com.exception.ResourceAlreadyExistsException;
 import com.exception.ResourceNotFoundException;
 import com.mapper.ClienteMapper;
 import com.repository.RepositoryCliente;
 import com.service.ServiceCliente;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+
+//Si definisce al capo della classe, perche ogni operazione che si farà
+//in questo Service ,rispettano tutte le proprietà ACID
+
 @Service
+@Transactional
 public class ServiceClienteImpl implements ServiceCliente {
 
-    private RepositoryCliente repositoryCliente;
+    private final RepositoryCliente repositoryCliente;
+    private final PasswordEncoder passwordEncoder;
 
+    public ServiceClienteImpl(RepositoryCliente repositoryCliente ,PasswordEncoder passwordEncoder) {
 
-    @Autowired
-    public ServiceClienteImpl(RepositoryCliente repositoryCliente) {
+        this.passwordEncoder=passwordEncoder;
         this.repositoryCliente = repositoryCliente;
     }
 
-    @Override
-    @Transactional
-    public ClienteDto creaCliente(ClienteDto clienteDto) {
-        Cliente cliente = ClienteMapper.mapToCliente(clienteDto);
-        Cliente clienteSalvato = repositoryCliente.save(cliente);
-
-        return ClienteMapper.mapToClienteDto(clienteSalvato);
-    }
 
     @Override
-    public Optional<ClienteDto> getClienteById(Integer clienteId) {
-
-        Optional<Cliente> clienteOptional = repositoryCliente.findById(clienteId);
-
-        if (clienteOptional.isPresent()) {
-            Cliente cliente = clienteOptional.get();
-            ClienteDto clienteDto = new ClienteDto();
-            clienteDto.setCodCliente(cliente.getCodCliente());
-            clienteDto.setNome(cliente.getNome());
-            clienteDto.setCognome(cliente.getCognome());
-            clienteDto.setEmail(cliente.getEmail());
-            clienteDto.setNumConto(cliente.getNumConto());
-            clienteDto.setSaldoContoCorrente(cliente.getSaldoContoCorrente());
-            return Optional.of(clienteDto);
-        }
-        //else ??
-        return Optional.empty();
-    }
-
-    @Override
-    public List<ClienteDto> getAllClienti() {
-        List<Cliente> clienti =
-                repositoryCliente.findAll();
-
-        return clienti.stream()
-
+    public List<ClienteDto> findAll() {
+        return repositoryCliente.findAll()
+                .stream()
                 .map(ClienteMapper::mapToClienteDto)
+                .toList();    }
 
-                .toList();
+    @Override
+    public ClienteDto findById(Integer id) {
+
+        Cliente cliente = repositoryCliente.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cliente non trovato"));
+
+        return ClienteMapper.mapToClienteDto(cliente);
     }
 
     @Override
-    public ClienteDto updateCliente(
+    public ClienteDto save(ClienteDto dto) {
 
-            Integer codCliente,
-            ClienteDto clienteDto){
-        Cliente cliente =
-                repositoryCliente.findById(codCliente)
-
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Cliente non trovato"));
-
-        cliente.setNome(clienteDto.getNome());
-        cliente.setCognome(clienteDto.getCognome());
-        cliente.setEmail(clienteDto.getEmail());
-        cliente.setSaldoContoCorrente(
-                clienteDto.getSaldoContoCorrente());
-        cliente.setNumConto(
-                clienteDto.getNumConto());
-        cliente.setRuolo(
-                clienteDto.getRuolo());
-        Cliente salvato =
-                repositoryCliente.save(cliente);
+        Cliente cliente = ClienteMapper.mapToCliente(dto);
+        cliente.setPassword(passwordEncoder.encode(dto.getPassword()));
+        Cliente salvato = repositoryCliente.save(cliente);
 
         return ClienteMapper.mapToClienteDto(salvato);
     }
 
     @Override
-    public void deleteCliente(Integer codCliente){
+    public ClienteDto update(Integer id, ClienteDto dto) {
 
-        Cliente cliente =
-                repositoryCliente.findById(codCliente)
+        Cliente cliente = repositoryCliente.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cliente non trovato"));
 
-                        .orElseThrow(() ->
-                                new ResourceNotFoundException(
-                                        "Cliente non trovato"));
+        cliente.setNome(dto.getNome());
+        cliente.setCognome(dto.getCognome());
+        cliente.setEmail(dto.getEmail());
+        cliente.setRuolo(dto.getRuolo());
+
+        if(dto.getPassword()!=null){
+            passwordEncoder.encode(dto.getPassword());
+        }
+
+        if(repositoryCliente.existsByEmail(dto.getEmail())){
+            throw new ResourceAlreadyExistsException(
+                    "Email già presente"
+            );
+        }
+
+        Cliente aggiornato = repositoryCliente.save(cliente);
+
+        return ClienteMapper.mapToClienteDto(aggiornato);
+    }
+
+    @Override
+    public void delete(Integer id) {
+
+        Cliente cliente = repositoryCliente.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cliente non trovato"));
 
         repositoryCliente.delete(cliente);
 
     }
 
+    @Override
+    public ClienteDto findByEmail(String email) {
+
+        Cliente cliente = repositoryCliente.findByEmail(email)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Cliente non trovato"));
+
+        return ClienteMapper.mapToClienteDto(cliente);
+    }
 }
